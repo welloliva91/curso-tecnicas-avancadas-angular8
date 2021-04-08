@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Filme } from '../shared/models/filme';
 import { ConfigParams } from '../shared/models/config-params';
 import { ConfigParamsService } from './config-params.service';
+import { identifierModuleUrl } from '@angular/compiler';
 
 const url = 'http://localhost:3000/filmes/';
 @Injectable({
@@ -16,6 +17,10 @@ export class FilmesService {
 
   salvar(filme: Filme): Observable<Filme> {
     return this.http.post<Filme>(url, filme);
+  }
+
+  editar(filme: Filme): Observable<Filme> {
+    return this.http.put<Filme>(url + filme.id, filme);
   }
 
   listar(config: ConfigParams): Observable<Filme[]> {
